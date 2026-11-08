@@ -1,0 +1,67 @@
+{
+  "name": "higgyui",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/ui.es.js",
+      "require": "./dist/ui.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build && npm run build:css",
+    "build:css": "tailwindcss -m -i ./src/styles.css -o ./dist/styles.css",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "storybook": "concurrently \"npm run storybook:css\" \"storybook dev -p 6006\"",
+    "storybook:css": "tailwindcss -w -i ./src/styles.css -o ./src/index.css",
+    "build-storybook": "concurrently \"npm run build-storybook:css\" \"storybook build\"",
+    "build-storybook:css": "tailwindcss -m -i ./src/styles.css -o ./src/index.css",
+    "prepublishOnly": "npm run build",
+    "dev:lib": "concurrently -k \"vite build --watch\" \"npm run build:css -- --watch\""
+  },
+  "peerDependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "latest",
+    "@storybook/addon-a11y": "^10.6.2",
+    "@storybook/addon-docs": "^10.6.2",
+    "@storybook/addon-vitest": "^10.6.2",
+    "@storybook/react-vite": "^10.6.2",
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser-playwright": "latest",
+    "@vitest/coverage-v8": "latest",
+    "concurrently": "^10.0.6",
+    "oxlint": "^1.81.0",
+    "playwright": "latest",
+    "storybook": "^10.6.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vite-plugin-dts": "^5.1.2",
+    "vitest": "latest"
+  },
+  "dependencies": {
+    "lucide-react": "^1.57.0"
+  },
+  "main": "./dist/ui.cjs",
+  "module": "./dist/ui.es.js",
+  "sideEffects": [
+    "**/*.css"
+  ]
+}
